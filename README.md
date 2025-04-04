@@ -2,7 +2,7 @@
 https://docs.google.com/document/d/1zpXXeSae-BlcxPKgw3DhxZA92cspVailrPYoaXSYrW8/edit?pli=1&tab=t.0
 
 ### Ссылка на деплой проекта 
-https://unique-cannoli-dc9afc.netlify.app/
+[https://unique-cannoli-dc9afc.netlify.app/](https://lustrous-tapioca-c3b4fb.netlify.app/)
 
 ### Требования
 Для установки и запуска проекта, необходим [NodeJS](https://nodejs.org/) v8+.
