@@ -37,11 +37,12 @@ function clearAll() {
 for (const buttonValue of buttonValues) {
   let button = document.createElement("button");
   button.innerText = buttonValue;
+  button.classList.add("calculator-button");
   if (buttonsOnTheRight.includes(buttonValue)) {
-    button.style.backgroundColor = "#ff9f0a";
+    button.classList.add("orange-color");
   }
   if (buttonsOnTheTop.includes(buttonValue)) {
-    button.style.backgroundColor = "#535353";
+    button.classList.add("top-color");
   }
   if (buttonValue === "0") {
     button.style.width = "150px";

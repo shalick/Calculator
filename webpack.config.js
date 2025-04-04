@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const module = {
   mode: "production",
-  entry: path.resolve(__dirname, "src/index.js"),
+  entry: [path.resolve(__dirname, "src/index.js"), path.resolve(__dirname, "src/darkmode.js")],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name][contenthash].js",
