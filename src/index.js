@@ -27,7 +27,13 @@ class Calculator {
     this.previousOperand = this.currentOperand;
     this.currentOperand = "";
   }
-
+  calculateChange() {
+    if (this.currentOperand === "") return;
+    let current = parseFloat(this.currentOperand);
+    let changeValue = current * -1;
+    this.currentOperand = changeValue.toString();
+    this.updateDisplay();
+  }
   calculatePercentage() {
     if (this.currentOperand === "") return;
     let current = parseFloat(this.currentOperand);
@@ -134,17 +140,15 @@ const OPERATORS = {
   MINUS: "-",
   PLUS: "+",
 };
-const EQUALS = {
-  EQUALS: "=",
-};
-const ALLCLEAR = {
-  ALLCLEAR: "AC",
-};
 const TOPBUTTONS = {
   ALLCLEAR: "AC",
   CHANGE: "+/-",
   PERCENT: "%",
 };
+const EQUALS = "=";
+const ALLCLEAR = "AC";
+const PERCENT = "%";
+const CHANGE = "+/-";
 
 for (const buttonValue in VALUES) {
   let button = document.createElement("button");
@@ -159,15 +163,22 @@ for (const buttonValue in VALUES) {
     button.dataset.operation = VALUES[buttonValue];
     button.classList.add("orange-color");
   }
-  if (Object.keys(EQUALS).includes(buttonValue)) {
+  if (Object.keys(TOPBUTTONS).includes(buttonValue)) {
+    button.classList.add("top-color");
+  }
+  if (VALUES[buttonValue] === EQUALS) {
     button.dataset.equals = VALUES[buttonValue];
     button.classList.add("orange-color");
   }
-  if (Object.keys(ALLCLEAR).includes(buttonValue)) {
+  if (VALUES[buttonValue] === ALLCLEAR) {
     button.dataset.allclear = VALUES[buttonValue];
   }
-  if (Object.keys(TOPBUTTONS).includes(buttonValue))
-    button.classList.add("top-color");
+  if (VALUES[buttonValue] === CHANGE) {
+    button.dataset.change = VALUES[buttonValue];
+  }
+  if (VALUES[buttonValue] === PERCENT) {
+    button.dataset.percent = VALUES[buttonValue];
+  }
   if (VALUES[buttonValue] === "0") button.classList.add("zero");
   document.querySelector(".buttons").appendChild(button);
 }
@@ -176,6 +187,8 @@ const numberButtons = document.querySelectorAll("[data-number]");
 const operationButtons = document.querySelectorAll("[data-operation]");
 const equalsButton = document.querySelector("[data-equals]");
 const allClearButton = document.querySelector("[data-allclear]");
+const changeButton = document.querySelector("[data-change]");
+const percentButton = document.querySelector("[data-percent]");
 const previousOperandTextElement = document.querySelector(
   "[data-previous-operand]",
 );
@@ -207,4 +220,10 @@ equalsButton.addEventListener("click", () => {
 allClearButton.addEventListener("click", () => {
   calculator.allClear();
   calculator.updateDisplay();
+});
+percentButton.addEventListener("click", () => {
+  calculator.calculatePercentage();
+});
+changeButton.addEventListener("click", () => {
+  calculator.calculateChange();
 });
