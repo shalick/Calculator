@@ -8,6 +8,7 @@ const module = {
   mode: "production",
   entry: [
     path.resolve(__dirname, "src/index.js"),
+    path.resolve(__dirname, "src/calculator.js"),
     path.resolve(__dirname, "src/darkmode.js"),
   ],
   output: {

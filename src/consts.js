@@ -1,0 +1,40 @@
+export const VALUES = {
+  ALLCLEAR: "AC",
+  CHANGE: "+/-",
+  PERCENT: "%",
+  DIVIDE: "÷",
+  SEVEN: "7",
+  EIGHT: "8",
+  NINE: "9",
+  MULTIPLY: "×",
+  FOUR: "4",
+  FIVE: "5",
+  SIX: "6",
+  MINUS: "-",
+  ONE: "1",
+  TWO: "2",
+  TREE: "3",
+  PLUS: "+",
+  ZERO: "0",
+  DECIMAL: ".",
+  EQUALS: "=",
+};
+export const NUMBERVALUES = [
+  VALUES.ZERO,
+  VALUES.ONE,
+  VALUES.TWO,
+  VALUES.TREE,
+  VALUES.FOUR,
+  VALUES.FIVE,
+  VALUES.SIX,
+  VALUES.SEVEN,
+  VALUES.EIGHT,
+  VALUES.NINE,
+];
+export const OPERATORS = [
+  VALUES.DIVIDE,
+  VALUES.MULTIPLY,
+  VALUES.MINUS,
+  VALUES.PLUS,
+];
+export const TOPBUTTONS = [VALUES.ALLCLEAR, VALUES.CHANGE, VALUES.PERCENT];
