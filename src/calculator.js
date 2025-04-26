@@ -1,4 +1,5 @@
-import Calculator from "./calculator-class.js";
+import { Calculator, CalculatorInvoker } from "./calculator-class.js";
+import { CalculatorUI } from "./calculator-ui-class.js";
 
 const numberButtons = document.querySelectorAll("[data-number]");
 const operationButtons = document.querySelectorAll("[data-operation]");
@@ -13,30 +14,35 @@ const currentOperandTextElement = document.querySelector(
   "[data-current-operand]",
 );
 
-const calculator = new Calculator(
+const calculator = new Calculator();
+const invoker = new CalculatorInvoker();
+const calculatorUI = new CalculatorUI(
+  calculator,
+  invoker,
   previousOperandTextElement,
   currentOperandTextElement,
 );
 
 for (const button of numberButtons) {
   button.addEventListener("click", () => {
-    calculator.appendNumber(button.innerText);
+    calculatorUI.appendNumber(button.innerText);
   });
 }
 for (const button of operationButtons) {
   button.addEventListener("click", () => {
-    calculator.chooseOperation(button.innerText);
+    calculatorUI.chooseOperation(button.innerText);
   });
 }
 equalsButton.addEventListener("click", () => {
-  calculator.compute();
+  console.log("hey");
+  calculatorUI.calculate();
 });
 allClearButton.addEventListener("click", () => {
-  calculator.allClear();
+  calculatorUI.allClear();
 });
 percentButton.addEventListener("click", () => {
-  calculator.calculatePercentage();
+  calculatorUI.calculateChangeOrPercent(percentButton.innerText);
 });
 changeButton.addEventListener("click", () => {
-  calculator.calculateChange();
+  calculatorUI.calculateChangeOrPercent(changeButton.innerText);
 });
