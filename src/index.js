@@ -2,9 +2,11 @@ import "./styles/main.css";
 import {
   VALUES,
   NUMBERVALUES,
-  OPERATORS,
   TOPBUTTONS,
   MEMORYBUTTONS,
+  UNARYOPERATIONS,
+  BINARYOPERATIONS,
+  OPERATORS,
 } from "./consts.js";
 
 for (const buttonValue in VALUES) {
@@ -16,28 +18,20 @@ for (const buttonValue in VALUES) {
     VALUES[buttonValue] === VALUES.DECIMAL
   )
     button.dataset.number = VALUES[buttonValue];
-  if (OPERATORS.includes(VALUES[buttonValue])) {
+  if (BINARYOPERATIONS.includes(VALUES[buttonValue])) {
     button.dataset.operation = VALUES[buttonValue];
+  }
+  if (OPERATORS.includes(VALUES[buttonValue])) {
     button.classList.add("orange-color");
+  }
+  if (UNARYOPERATIONS.includes(VALUES[buttonValue])) {
+    button.dataset.unaryoperation = VALUES[buttonValue];
   }
   if (TOPBUTTONS.includes(VALUES[buttonValue])) {
     button.classList.add("top-color");
   }
   if (MEMORYBUTTONS.includes(VALUES[buttonValue])) {
-    switch (VALUES[buttonValue]) {
-      case VALUES.MC:
-        button.dataset.mc = VALUES[buttonValue];
-        break;
-      case VALUES.MPLUS:
-        button.dataset.mplus = VALUES[buttonValue];
-        break;
-      case VALUES.MINUS:
-        button.dataset.mminus = VALUES[buttonValue];
-        break;
-      case VALUES.MR:
-        button.dataset.mr = VALUES[buttonValue];
-        break;
-    }
+    button.dataset.memory = VALUES[buttonValue];
   }
   switch (VALUES[buttonValue]) {
     case VALUES.EQUALS:
@@ -46,12 +40,6 @@ for (const buttonValue in VALUES) {
       break;
     case VALUES.ALLCLEAR:
       button.dataset.allclear = VALUES[buttonValue];
-      break;
-    case VALUES.CHANGE:
-      button.dataset.change = VALUES[buttonValue];
-      break;
-    case VALUES.PERCENT:
-      button.dataset.percent = VALUES[buttonValue];
       break;
     case VALUES.ZERO:
       button.classList.add("zero");

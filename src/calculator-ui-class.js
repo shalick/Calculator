@@ -9,6 +9,14 @@ import {
   MemoryAddCommand,
   MemoryRecallCommand,
   MemorySubtractCommand,
+  SquareCommand,
+  CubeCommand,
+  TenToTheXCommand,
+  SquareRootCommand,
+  CubeRootCommand,
+  FactorialCommand,
+  PowerCommand,
+  YRootCommand,
 } from "./calculator-commands-classes.js";
 import { VALUES } from "./consts.js";
 
@@ -73,6 +81,12 @@ export class CalculatorUI {
       case VALUES.DIVIDE:
         result = new DivideCommand(this.calculator, prev, current);
         break;
+      case VALUES.POWER:
+        result = new PowerCommand(this.calculator, prev, current);
+        break;
+      case VALUES.YROOT:
+        result = new YRootCommand(this.calculator, current, prev);
+        break;
       default:
         return;
     }
@@ -82,15 +96,71 @@ export class CalculatorUI {
     this.previousOperand = "";
     this.updateDisplay();
   }
-  calculateChangeOrPercent(operation) {
+  memoryOperation(operation) {
+    const displayValue = parseFloat(this.currentOperand);
+    switch (operation) {
+      case VALUES.MC:
+        this.invoker.storeAndExecute(new MemoryClearCommand(this.calculator));
+        break;
+      case VALUES.MPLUS:
+        if (!isNaN(displayValue))
+          this.invoker.storeAndExecute(
+            new MemoryAddCommand(this.calculator, displayValue),
+          );
+        break;
+      case VALUES.MINUS:
+        if (!isNaN(displayValue))
+          this.invoker.storeAndExecute(
+            new MemorySubtractCommand(this.calculator, displayValue),
+          );
+        break;
+      case VALUES.MR:
+        this.currentOperand = this.invoker.storeAndExecute(
+          new MemoryRecallCommand(this.calculator),
+        );
+        break;
+      default:
+        return;
+    }
+    this.updateDisplay();
+  }
+  chooseUnaryOperation(operation) {
     if (this.currentOperand === "") return;
     let result;
     let current = parseFloat(this.currentOperand);
-    if (operation === VALUES.CHANGE) {
-      result = new SignChangeCommand(this.calculator, current);
-    }
-    if (operation === VALUES.PERCENT) {
-      result = new PercentCommand(this.calculator, current);
+    switch (operation) {
+      case VALUES.CHANGE:
+        result = new SignChangeCommand(this.calculator, current);
+        break;
+
+      case VALUES.PERCENT:
+        result = new PercentCommand(this.calculator, current);
+        break;
+
+      case VALUES.SQUARE:
+        result = new SquareCommand(this.calculator, current);
+        break;
+
+      case VALUES.CUBE:
+        result = new CubeCommand(this.calculator, current);
+        break;
+      case VALUES.TENTOTHEX:
+        result = new TenToTheXCommand(this.calculator, current);
+        break;
+      case VALUES.RECIPROCAL:
+        result = new TenToTheXCommand(this.calculator, current);
+        break;
+      case VALUES.SQUAREROOT:
+        result = new SquareRootCommand(this.calculator, current);
+        break;
+      case VALUES.CUBEROOT:
+        result = new CubeRootCommand(this.calculator, current);
+        break;
+      case VALUES.FACTORIAL:
+        result = new FactorialCommand(this.calculator, current);
+        break;
+      default:
+        return;
     }
     const outputValue = this.invoker.storeAndExecute(result);
     this.currentOperand = outputValue;
