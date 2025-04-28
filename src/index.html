@@ -31,7 +31,11 @@
       </svg>
     </button>
     <div class="calculator">
-      <input type="text" class="display" readonly />
+      <div class="display">
+        <div data-previous-operand class="previous-operand" readonly></div>
+        <div data-current-operand class="current-operand" readonly></div>
+      </div>
+
       <div class="buttons"></div>
     </div>
   </body>

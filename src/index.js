@@ -1,144 +1,49 @@
 import "./styles/main.css";
-const buttonValues = [
-  "AC",
-  "+/-",
-  "%",
-  "÷",
-  "7",
-  "8",
-  "9",
-  "×",
-  "4",
-  "5",
-  "6",
-  "-",
-  "1",
-  "2",
-  "3",
-  "+",
-  "0",
-  ".",
-  "=",
-];
-const buttonsOnTheRight = ["÷", "×", "-", "+", "="];
-const buttonsOnTheTop = ["AC", "+/-", "%"];
-let a = 0;
-let b = null;
-let operator = null;
-const display = document.querySelector(".display");
-display.value = "0";
+import {
+  VALUES,
+  NUMBERVALUES,
+  TOPBUTTONS,
+  MEMORYBUTTONS,
+  UNARYOPERATIONS,
+  BINARYOPERATIONS,
+  OPERATORS,
+} from "./consts.js";
 
-function clearAll() {
-  a = null;
-  b = null;
-  operator = null;
-}
-
-for (const buttonValue of buttonValues) {
+for (const buttonValue in VALUES) {
   let button = document.createElement("button");
-  button.innerText = buttonValue;
+  button.innerText = VALUES[buttonValue];
   button.classList.add("calculator-button");
-  if (buttonsOnTheRight.includes(buttonValue)) {
+  if (
+    NUMBERVALUES.includes(VALUES[buttonValue]) ||
+    VALUES[buttonValue] === VALUES.DECIMAL
+  )
+    button.dataset.number = VALUES[buttonValue];
+  if (BINARYOPERATIONS.includes(VALUES[buttonValue])) {
+    button.dataset.operation = VALUES[buttonValue];
+  }
+  if (OPERATORS.includes(VALUES[buttonValue])) {
     button.classList.add("orange-color");
   }
-  if (buttonsOnTheTop.includes(buttonValue)) {
+  if (UNARYOPERATIONS.includes(VALUES[buttonValue])) {
+    button.dataset.unaryoperation = VALUES[buttonValue];
+  }
+  if (TOPBUTTONS.includes(VALUES[buttonValue])) {
     button.classList.add("top-color");
   }
-  if (buttonValue === "0") {
-    button.style.width = "150px";
-    button.style.gridColumn = "span 2";
+  if (MEMORYBUTTONS.includes(VALUES[buttonValue])) {
+    button.dataset.memory = VALUES[buttonValue];
   }
-
-  button.addEventListener("click", () => {
-    if (buttonsOnTheRight.includes(buttonValue)) {
-      if (buttonValue === "=") {
-        if (a !== null) {
-          b = display.value;
-          let numA = Number(a);
-          let numB = Number(b);
-
-          if (operator === "÷") {
-            display.value = numA / numB;
-          } else if (operator === "×") {
-            display.value = numA * numB;
-          } else if (operator === "-") {
-            display.value = numA - numB;
-          } else if (operator === "+") {
-            display.value = numA + numB;
-          }
-          clearAll();
-        }
-      } else {
-        operator = buttonValue;
-        a = display.value;
-        display.value = "";
-      }
-    } else if (buttonsOnTheTop.includes(buttonValue)) {
-      if (buttonValue === "AC") {
-        clearAll();
-        display.value = 0;
-      } else if (buttonValue === "+/-") {
-        if (display.value != "" && display.value != "0") {
-          if (display.value[0] == "-") {
-            display.value = display.value.slice(1);
-          } else {
-            display.value = "-" + display.value;
-          }
-        }
-      } else if (buttonValue === "%") {
-        display.value = Number(display.value) / 100;
-      }
-    } else {
-      if (buttonValue === ".") {
-        if (display.value != "" && !display.value.includes(buttonValue)) {
-          display.value += buttonValue;
-        }
-      } else if (display.value === "0") {
-        display.value = buttonValue;
-      } else {
-        display.value += buttonValue;
-      }
-    }
-  });
+  switch (VALUES[buttonValue]) {
+    case VALUES.EQUALS:
+      button.dataset.equals = VALUES[buttonValue];
+      button.classList.add("orange-color");
+      break;
+    case VALUES.ALLCLEAR:
+      button.dataset.allclear = VALUES[buttonValue];
+      break;
+    case VALUES.ZERO:
+      button.classList.add("zero");
+      break;
+  }
   document.querySelector(".buttons").appendChild(button);
 }
-
-document.addEventListener("keydown", function (event) {
-  let keyValue = event.key;
-  const keys = ["Enter", "*", "/"];
-  if (buttonValues.includes(keyValue) || keys.includes(keyValue)) {
-    if (buttonsOnTheRight.includes(keyValue) || keys.includes(keyValue)) {
-      if (keyValue === "=" || keyValue === "Enter") {
-        console.log(a, b);
-        if (a !== null) {
-          b = display.value;
-          let numA = Number(a);
-          let numB = Number(b);
-
-          if (operator === "/") {
-            display.value = numA / numB;
-          } else if (operator === "*") {
-            display.value = numA * numB;
-          } else if (operator === "-") {
-            display.value = numA - numB;
-          } else if (operator === "+") {
-            display.value = numA + numB;
-          }
-          clearAll();
-        }
-      } else {
-        operator = keyValue;
-        a = display.value;
-        display.value = "";
-      }
-    } else if (keyValue === ".") {
-      if (display.value != "" && !display.value.includes(keyValue)) {
-        display.value += keyValue;
-      }
-    } else if (display.value === "0") {
-      display.value = keyValue;
-    } else {
-      display.value += keyValue;
-    }
-  }
-});
