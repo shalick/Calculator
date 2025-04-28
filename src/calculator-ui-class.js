@@ -5,6 +5,10 @@ import {
   DivideCommand,
   SignChangeCommand,
   PercentCommand,
+  MemoryClearCommand,
+  MemoryAddCommand,
+  MemoryRecallCommand,
+  MemorySubtractCommand,
 } from "./calculator-commands-classes.js";
 import { VALUES } from "./consts.js";
 
@@ -120,5 +124,36 @@ export class CalculatorUI {
     } else {
       this.previousOperandTextElement.innerText = "";
     }
+  }
+  memoryClear() {
+    this.invoker.storeAndExecute(new MemoryClearCommand(this.calculator));
+  }
+
+  memoryAdd() {
+    const displayValue = parseFloat(this.currentOperand);
+    if (!isNaN(displayValue)) {
+      this.invoker.storeAndExecute(
+        new MemoryAddCommand(this.calculator, displayValue),
+      );
+      this.updateDisplay();
+    }
+  }
+
+  memorySubtract() {
+    const displayValue = parseFloat(this.currentOperand);
+    if (!isNaN(displayValue)) {
+      this.invoker.storeAndExecute(
+        new MemorySubtractCommand(this.calculator, displayValue),
+      );
+      this.updateDisplay();
+    }
+  }
+
+  memoryRecall() {
+    const recalledValue = this.invoker.storeAndExecute(
+      new MemoryRecallCommand(this.calculator),
+    );
+    this.currentOperand = recalledValue;
+    this.updateDisplay();
   }
 }

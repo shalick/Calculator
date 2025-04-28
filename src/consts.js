@@ -1,4 +1,8 @@
 export const VALUES = {
+  MC: "MC",
+  MPLUS: "M+",
+  MMINUS: "M-",
+  MR: "MR",
   ALLCLEAR: "AC",
   CHANGE: "+/-",
   PERCENT: "%",
@@ -38,3 +42,4 @@ export const OPERATORS = [
   VALUES.PLUS,
 ];
 export const TOPBUTTONS = [VALUES.ALLCLEAR, VALUES.CHANGE, VALUES.PERCENT];
+export const MEMORYBUTTONS = [VALUES.MC, VALUES.MPLUS, VALUES.MINUS, VALUES.MR];

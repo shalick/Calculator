@@ -7,6 +7,10 @@ const equalsButton = document.querySelector("[data-equals]");
 const allClearButton = document.querySelector("[data-allclear]");
 const changeButton = document.querySelector("[data-change]");
 const percentButton = document.querySelector("[data-percent]");
+const memoryAddButton = document.querySelector("[data-mplus]");
+const memoryClearButton = document.querySelector("[data-mc]");
+const memorySubtract = document.querySelector("[data-mminus]");
+const memoryRecall = document.querySelector("[data-mr]");
 const previousOperandTextElement = document.querySelector(
   "[data-previous-operand]",
 );
@@ -34,7 +38,6 @@ for (const button of operationButtons) {
   });
 }
 equalsButton.addEventListener("click", () => {
-  console.log("hey");
   calculatorUI.calculate();
 });
 allClearButton.addEventListener("click", () => {
@@ -45,4 +48,16 @@ percentButton.addEventListener("click", () => {
 });
 changeButton.addEventListener("click", () => {
   calculatorUI.calculateChangeOrPercent(changeButton.innerText);
+});
+memoryAddButton.addEventListener("click", () => {
+  calculatorUI.memoryAdd();
+});
+memoryClearButton.addEventListener("click", () => {
+  calculatorUI.memoryClear();
+});
+memoryRecall.addEventListener("click", () => {
+  calculatorUI.memoryRecall();
+});
+memorySubtract.addEventListener("click", () => {
+  calculatorUI.memorySubtract();
 });

@@ -1,7 +1,52 @@
 class Command {
   execute() {}
+  undo() {}
+}
+export class MemoryClearCommand extends Command {
+  constructor(calculator) {
+    super();
+    this.calculator = calculator;
+  }
+
+  execute() {
+    return this.calculator.clearMemory();
+  }
 }
 
+export class MemoryAddCommand extends Command {
+  constructor(calculator, value) {
+    super();
+    this.calculator = calculator;
+    this.value = value;
+  }
+
+  execute() {
+    return this.calculator.addToMemory(this.value);
+  }
+}
+
+export class MemorySubtractCommand extends Command {
+  constructor(calculator, value) {
+    super();
+    this.calculator = calculator;
+    this.value = value;
+  }
+
+  execute() {
+    return this.calculator.subtractFromMemory(this.value);
+  }
+}
+
+export class MemoryRecallCommand extends Command {
+  constructor(calculator) {
+    super();
+    this.calculator = calculator;
+  }
+
+  execute() {
+    return this.calculator.recallMemory();
+  }
+}
 export class SignChangeCommand extends Command {
   constructor(calculator, a) {
     super();

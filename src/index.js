@@ -1,5 +1,11 @@
 import "./styles/main.css";
-import { VALUES, NUMBERVALUES, OPERATORS, TOPBUTTONS } from "./consts.js";
+import {
+  VALUES,
+  NUMBERVALUES,
+  OPERATORS,
+  TOPBUTTONS,
+  MEMORYBUTTONS,
+} from "./consts.js";
 
 for (const buttonValue in VALUES) {
   let button = document.createElement("button");
@@ -16,6 +22,22 @@ for (const buttonValue in VALUES) {
   }
   if (TOPBUTTONS.includes(VALUES[buttonValue])) {
     button.classList.add("top-color");
+  }
+  if (MEMORYBUTTONS.includes(VALUES[buttonValue])) {
+    switch (VALUES[buttonValue]) {
+      case VALUES.MC:
+        button.dataset.mc = VALUES[buttonValue];
+        break;
+      case VALUES.MPLUS:
+        button.dataset.mplus = VALUES[buttonValue];
+        break;
+      case VALUES.MINUS:
+        button.dataset.mminus = VALUES[buttonValue];
+        break;
+      case VALUES.MR:
+        button.dataset.mr = VALUES[buttonValue];
+        break;
+    }
   }
   switch (VALUES[buttonValue]) {
     case VALUES.EQUALS:
