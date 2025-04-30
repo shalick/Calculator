@@ -35,10 +35,10 @@ export class Calculator {
     return a * a * a;
   }
   power(base, exponent) {
-    return Math.pow(base, exponent);
+    return base ** exponent;
   }
   tenToTheX(exponent) {
-    return Math.pow(10, exponent);
+    return 10 ** exponent;
   }
   reciprocal(a) {
     if (a === 0) throw new Error("Cannot take reciprocal of zero");

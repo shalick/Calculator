@@ -189,41 +189,10 @@ export class CalculatorUI {
     this.currentOperandTextElement.innerText = this.getDisplayNumber(
       this.currentOperand,
     );
-    if (this.operation != null) {
-      this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
-    } else {
-      this.previousOperandTextElement.innerText = "";
-    }
-  }
-  memoryClear() {
-    this.invoker.storeAndExecute(new MemoryClearCommand(this.calculator));
-  }
-
-  memoryAdd() {
-    const displayValue = parseFloat(this.currentOperand);
-    if (!isNaN(displayValue)) {
-      this.invoker.storeAndExecute(
-        new MemoryAddCommand(this.calculator, displayValue),
-      );
-      this.updateDisplay();
-    }
-  }
-
-  memorySubtract() {
-    const displayValue = parseFloat(this.currentOperand);
-    if (!isNaN(displayValue)) {
-      this.invoker.storeAndExecute(
-        new MemorySubtractCommand(this.calculator, displayValue),
-      );
-      this.updateDisplay();
-    }
-  }
-
-  memoryRecall() {
-    const recalledValue = this.invoker.storeAndExecute(
-      new MemoryRecallCommand(this.calculator),
-    );
-    this.currentOperand = recalledValue;
-    this.updateDisplay();
+    this.operation != null
+      ? this.operation === VALUES.POWER || this.operation === VALUES.YROOT
+        ? (this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation.slice(1, -1)}`)
+        : (this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`)
+      : (this.previousOperandTextElement.innerText = "");
   }
 }

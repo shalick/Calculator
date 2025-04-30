@@ -2,7 +2,6 @@ import "./styles/main.css";
 import {
   VALUES,
   NUMBERVALUES,
-  TOPBUTTONS,
   MEMORYBUTTONS,
   UNARYOPERATIONS,
   BINARYOPERATIONS,
@@ -16,8 +15,10 @@ for (const buttonValue in VALUES) {
   if (
     NUMBERVALUES.includes(VALUES[buttonValue]) ||
     VALUES[buttonValue] === VALUES.DECIMAL
-  )
+  ) {
     button.dataset.number = VALUES[buttonValue];
+    button.classList.add("numbers-color");
+  }
   if (BINARYOPERATIONS.includes(VALUES[buttonValue])) {
     button.dataset.operation = VALUES[buttonValue];
   }
@@ -26,9 +27,6 @@ for (const buttonValue in VALUES) {
   }
   if (UNARYOPERATIONS.includes(VALUES[buttonValue])) {
     button.dataset.unaryoperation = VALUES[buttonValue];
-  }
-  if (TOPBUTTONS.includes(VALUES[buttonValue])) {
-    button.classList.add("top-color");
   }
   if (MEMORYBUTTONS.includes(VALUES[buttonValue])) {
     button.dataset.memory = VALUES[buttonValue];
