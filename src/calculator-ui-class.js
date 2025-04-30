@@ -11,16 +11,17 @@ import {
   MemorySubtractCommand,
   SquareCommand,
   CubeCommand,
-  TenToTheXCommand,
+  PowerOfTenCommand,
   SquareRootCommand,
   CubeRootCommand,
   FactorialCommand,
   PowerCommand,
-  YRootCommand,
+  YRootXCommand,
+  ReciprocalCommand,
 } from "./calculator-commands-classes.js";
 import { VALUES } from "./consts.js";
 
-export class CalculatorUI {
+export default class CalculatorUI {
   constructor(
     calculator,
     invoker,
@@ -85,7 +86,7 @@ export class CalculatorUI {
         result = new PowerCommand(this.calculator, prev, current);
         break;
       case VALUES.YROOT:
-        result = new YRootCommand(this.calculator, current, prev);
+        result = new YRootXCommand(this.calculator, current, prev);
         break;
       default:
         return;
@@ -145,10 +146,10 @@ export class CalculatorUI {
         result = new CubeCommand(this.calculator, current);
         break;
       case VALUES.TENTOTHEX:
-        result = new TenToTheXCommand(this.calculator, current);
+        result = new PowerOfTenCommand(this.calculator, current);
         break;
       case VALUES.RECIPROCAL:
-        result = new TenToTheXCommand(this.calculator, current);
+        result = new ReciprocalCommand(this.calculator, current);
         break;
       case VALUES.SQUAREROOT:
         result = new SquareRootCommand(this.calculator, current);
