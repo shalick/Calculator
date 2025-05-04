@@ -1,4 +1,4 @@
-export class Calculator {
+export default class Calculator {
   constructor() {
     this.memory = 0;
   }
@@ -35,10 +35,10 @@ export class Calculator {
     return a * a * a;
   }
   power(base, exponent) {
-    return Math.pow(base, exponent);
+    return base ** exponent;
   }
-  tenToTheX(exponent) {
-    return Math.pow(10, exponent);
+  powerOfTen(exponent) {
+    return 10 ** exponent;
   }
   reciprocal(a) {
     if (a === 0) throw new Error("Cannot take reciprocal of zero");
@@ -51,7 +51,7 @@ export class Calculator {
   cubeRoot(a) {
     return Math.cbrt(a);
   }
-  yRoot(base, root) {
+  yRootX(base, root) {
     if (root === 0 || (base < 0 && root % 2 === 0))
       throw new Error("Invalid operation");
     return Math.pow(base, 1 / root);
@@ -84,16 +84,5 @@ export class Calculator {
 
   recallMemory() {
     return this.memory;
-  }
-}
-
-export class CalculatorInvoker {
-  constructor() {
-    this.commands = [];
-  }
-
-  storeAndExecute(command) {
-    this.commands.push(command);
-    return command.execute();
   }
 }

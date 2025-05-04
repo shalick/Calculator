@@ -11,16 +11,17 @@ import {
   MemorySubtractCommand,
   SquareCommand,
   CubeCommand,
-  TenToTheXCommand,
+  PowerOfTenCommand,
   SquareRootCommand,
   CubeRootCommand,
   FactorialCommand,
   PowerCommand,
-  YRootCommand,
+  YRootXCommand,
+  ReciprocalCommand,
 } from "./calculator-commands-classes.js";
 import { VALUES } from "./consts.js";
 
-export class CalculatorUI {
+export default class CalculatorUI {
   constructor(
     calculator,
     invoker,
@@ -85,7 +86,7 @@ export class CalculatorUI {
         result = new PowerCommand(this.calculator, prev, current);
         break;
       case VALUES.YROOT:
-        result = new YRootCommand(this.calculator, current, prev);
+        result = new YRootXCommand(this.calculator, current, prev);
         break;
       default:
         return;
@@ -145,10 +146,10 @@ export class CalculatorUI {
         result = new CubeCommand(this.calculator, current);
         break;
       case VALUES.TENTOTHEX:
-        result = new TenToTheXCommand(this.calculator, current);
+        result = new PowerOfTenCommand(this.calculator, current);
         break;
       case VALUES.RECIPROCAL:
-        result = new TenToTheXCommand(this.calculator, current);
+        result = new ReciprocalCommand(this.calculator, current);
         break;
       case VALUES.SQUAREROOT:
         result = new SquareRootCommand(this.calculator, current);
@@ -189,41 +190,10 @@ export class CalculatorUI {
     this.currentOperandTextElement.innerText = this.getDisplayNumber(
       this.currentOperand,
     );
-    if (this.operation != null) {
-      this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
-    } else {
-      this.previousOperandTextElement.innerText = "";
-    }
-  }
-  memoryClear() {
-    this.invoker.storeAndExecute(new MemoryClearCommand(this.calculator));
-  }
-
-  memoryAdd() {
-    const displayValue = parseFloat(this.currentOperand);
-    if (!isNaN(displayValue)) {
-      this.invoker.storeAndExecute(
-        new MemoryAddCommand(this.calculator, displayValue),
-      );
-      this.updateDisplay();
-    }
-  }
-
-  memorySubtract() {
-    const displayValue = parseFloat(this.currentOperand);
-    if (!isNaN(displayValue)) {
-      this.invoker.storeAndExecute(
-        new MemorySubtractCommand(this.calculator, displayValue),
-      );
-      this.updateDisplay();
-    }
-  }
-
-  memoryRecall() {
-    const recalledValue = this.invoker.storeAndExecute(
-      new MemoryRecallCommand(this.calculator),
-    );
-    this.currentOperand = recalledValue;
-    this.updateDisplay();
+    this.operation != null
+      ? this.operation === VALUES.POWER || this.operation === VALUES.YROOT
+        ? (this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation.slice(1, -1)}`)
+        : (this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`)
+      : (this.previousOperandTextElement.innerText = "");
   }
 }

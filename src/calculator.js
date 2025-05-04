@@ -1,5 +1,6 @@
-import { Calculator, CalculatorInvoker } from "./calculator-class.js";
-import { CalculatorUI } from "./calculator-ui-class.js";
+import Calculator from "./calculator-class.js";
+import CalculatorInvoker from "./calculator-invoker-class.js";
+import CalculatorUI from "./calculator-ui-class.js";
 
 const numberButtons = document.querySelectorAll("[data-number]");
 const operationButtons = document.querySelectorAll("[data-operation]");
