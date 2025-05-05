@@ -1,8 +1,9 @@
 ### Задание 
-https://docs.google.com/document/d/1zpXXeSae-BlcxPKgw3DhxZA92cspVailrPYoaXSYrW8/edit?pli=1&tab=t.0
+https://drive.google.com/file/d/15jVnBPXaZrjs99KOUxp4TGq6Inau6xq_/view
 
 ### Ссылка на деплой проекта 
-https://unique-cannoli-dc9afc.netlify.app/
+https://subtle-salmiakki-c213f2.netlify.app/
+
 
 ### Требования
 Для установки и запуска проекта, необходим [NodeJS](https://nodejs.org/) v8+.
