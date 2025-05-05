@@ -71,3 +71,8 @@ export const UNARYOPERATIONS = [
   VALUES.FACTORIAL,
 ];
 export const MEMORYBUTTONS = [VALUES.MC, VALUES.MPLUS, VALUES.MINUS, VALUES.MR];
+export const KEYDOWNBUTTONS = {
+  MULTIPLY: "*",
+  DIVIDE: "/",
+  EQUALS: "Enter",
+};

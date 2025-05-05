@@ -133,15 +133,12 @@ export default class CalculatorUI {
       case VALUES.CHANGE:
         result = new SignChangeCommand(this.calculator, current);
         break;
-
       case VALUES.PERCENT:
         result = new PercentCommand(this.calculator, current);
         break;
-
       case VALUES.SQUARE:
         result = new SquareCommand(this.calculator, current);
         break;
-
       case VALUES.CUBE:
         result = new CubeCommand(this.calculator, current);
         break;
