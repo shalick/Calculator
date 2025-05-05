@@ -93,7 +93,7 @@ body {
   border-width: 1px;
 }
 
-.calculator-button:nth-last-child(1) {
+/* .calculator-button:nth-last-child(1) {
   grid-column-start: 7;
   border-bottom-right-radius: 10px;
 }
@@ -102,7 +102,7 @@ body {
 }
 .calculator-button:nth-last-child(4) {
   grid-column-start: 3;
-}
+} */
 .calculator-button:hover {
   opacity: 70%;
 }

@@ -14,7 +14,7 @@ export class AddCommand extends Command {
     return this.calculator.add(this.a, this.b);
   }
   undo() {
-    return this.calculator.subtract(this.a, this.b);
+    return this.calculator.subtract(this.calculator.currentValue, this.b);
   }
 }
 
@@ -30,7 +30,7 @@ export class SubtractCommand extends Command {
     return this.calculator.subtract(this.a, this.b);
   }
   undo() {
-    return this.calculator.add(this.a, this.b);
+    return this.calculator.add(this.calculator.currentValue, this.b);
   }
 }
 
@@ -46,7 +46,7 @@ export class MultiplyCommand extends Command {
     return this.calculator.multiply(this.a, this.b);
   }
   undo() {
-    return this.calculator.divide(this.a, this.b);
+    return this.calculator.divide(this.calculator.currentValue, this.b);
   }
 }
 
@@ -62,7 +62,7 @@ export class DivideCommand extends Command {
     return this.calculator.divide(this.a, this.b);
   }
   undo() {
-    return this.calculator.multiply(this.a, this.b);
+    return this.calculator.multiply(this.calculator.currentValue, this.b);
   }
 }
 export class SignChangeCommand extends Command {
@@ -75,6 +75,9 @@ export class SignChangeCommand extends Command {
   execute() {
     return this.calculator.signChange(this.a);
   }
+  undo() {
+    return this.calculator.signChange(this.calculator.currentValue);
+  }
 }
 
 export class PercentCommand extends Command {
@@ -82,10 +85,14 @@ export class PercentCommand extends Command {
     super();
     this.calculator = calculator;
     this.a = a;
+    this.originalValue = a;
   }
 
   execute() {
     return this.calculator.percent(this.a);
+  }
+  undo() {
+    return this.originalValue;
   }
 }
 

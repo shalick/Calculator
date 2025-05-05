@@ -10,6 +10,7 @@ const unaryOperationButtons = document.querySelectorAll(
 const memoryButtons = document.querySelectorAll("[data-memory]");
 const equalsButton = document.querySelector("[data-equals]");
 const allClearButton = document.querySelector("[data-allclear]");
+const undoButton = document.querySelector("[data-undo]");
 const previousOperandTextElement = document.querySelector(
   "[data-previous-operand]",
 );
@@ -51,4 +52,7 @@ equalsButton.addEventListener("click", () => {
 });
 allClearButton.addEventListener("click", () => {
   calculatorUI.allClear();
+});
+undoButton.addEventListener("click", () => {
+  calculatorUI.undo();
 });

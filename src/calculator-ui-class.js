@@ -196,4 +196,8 @@ export default class CalculatorUI {
         : (this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`)
       : (this.previousOperandTextElement.innerText = "");
   }
+  undo() {
+    this.currentOperand = this.invoker.undo();
+    this.updateDisplay();
+  }
 }

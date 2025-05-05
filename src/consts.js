@@ -27,6 +27,7 @@ export const VALUES = {
   TWO: "2",
   TREE: "3",
   PLUS: "+",
+  UNDO: "Undo",
   FACTORIAL: "x!",
   ZERO: "0",
   DECIMAL: ".",

@@ -1,27 +1,32 @@
 export default class Calculator {
   constructor() {
     this.memory = 0;
+    this.currentValue = 0;
   }
 
   add(a, b) {
-    return a + b;
+    this.currentValue = a + b;
+    return this.currentValue;
   }
 
   subtract(a, b) {
-    return a - b;
+    this.currentValue = a - b;
+    return this.currentValue;
   }
 
   multiply(a, b) {
-    return a * b;
+    this.currentValue = a * b;
+    return this.currentValue;
   }
-
   divide(a, b) {
     if (b === 0) throw new Error("Cannot divide by zero");
-    return a / b;
+    this.currentValue = a / b;
+    return this.currentValue;
   }
 
   signChange(a) {
-    return a * -1;
+    this.currentValue = a * -1;
+    return this.currentValue;
   }
 
   percent(a) {
