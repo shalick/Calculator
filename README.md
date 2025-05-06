@@ -2,7 +2,7 @@
 https://drive.google.com/file/d/15jVnBPXaZrjs99KOUxp4TGq6Inau6xq_/view
 
 ### Ссылка на деплой проекта 
-https://subtle-salmiakki-c213f2.netlify.app/
+[https://subtle-salmiakki-c213f2.netlify.app/](https://subtle-salmiakki-c213f2.netlify.app/)
 
 ### Требования
 Для установки и запуска проекта, необходим [NodeJS](https://nodejs.org/) v8+.
