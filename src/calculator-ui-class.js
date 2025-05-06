@@ -133,15 +133,12 @@ export default class CalculatorUI {
       case VALUES.CHANGE:
         result = new SignChangeCommand(this.calculator, current);
         break;
-
       case VALUES.PERCENT:
         result = new PercentCommand(this.calculator, current);
         break;
-
       case VALUES.SQUARE:
         result = new SquareCommand(this.calculator, current);
         break;
-
       case VALUES.CUBE:
         result = new CubeCommand(this.calculator, current);
         break;
@@ -195,5 +192,9 @@ export default class CalculatorUI {
         ? (this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation.slice(1, -1)}`)
         : (this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`)
       : (this.previousOperandTextElement.innerText = "");
+  }
+  undo() {
+    this.currentOperand = this.invoker.undo();
+    this.updateDisplay();
   }
 }

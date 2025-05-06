@@ -1,18 +1,40 @@
-import { defineConfig } from "eslint/config";
-import globals from "globals";
 import js from "@eslint/js";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import globals from "globals";
+import prettierPlugin from "eslint-plugin-prettier";
+import jestPlugin from "eslint-plugin-jest";
 
-export default defineConfig([
-  { files: ["**/*.{js,mjs,cjs}"] },
+export default [
   {
-    files: ["**/*.{js,mjs,cjs}"],
-    languageOptions: { globals: globals.browser },
+    ignores: ["dist/**", "node_modules/**"],
   },
   {
-    files: ["**/*.{js,mjs,cjs}"],
-    plugins: { js, eslintPluginPrettierRecommended },
-    extends: ["js/recommended"],
+    files: ["**/*.{js,cjs,mjs}"],
+    languageOptions: {
+      globals: globals.browser,
+      ecmaVersion: 2021,
+      sourceType: "module",
+    },
+    plugins: {
+      prettier: prettierPlugin,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      "prettier/prettier": "error",
+    },
   },
-  eslintPluginPrettierRecommended,
-]);
+
+  {
+    files: ["**/*.test.js", "**/__tests__/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+    },
+    plugins: {
+      jest: jestPlugin,
+    },
+    rules: {
+      ...jestPlugin.configs.recommended.rules,
+    },
+  },
+];

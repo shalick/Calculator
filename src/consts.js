@@ -27,6 +27,7 @@ export const VALUES = {
   TWO: "2",
   TREE: "3",
   PLUS: "+",
+  UNDO: "Undo",
   FACTORIAL: "x!",
   ZERO: "0",
   DECIMAL: ".",
@@ -70,3 +71,8 @@ export const UNARYOPERATIONS = [
   VALUES.FACTORIAL,
 ];
 export const MEMORYBUTTONS = [VALUES.MC, VALUES.MPLUS, VALUES.MINUS, VALUES.MR];
+export const KEYDOWNBUTTONS = {
+  MULTIPLY: "*",
+  DIVIDE: "/",
+  EQUALS: "Enter",
+};

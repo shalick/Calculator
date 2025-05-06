@@ -1,5 +1,6 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
+import FaviconsWebpackPlugin from "favicons-webpack-plugin";
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -15,6 +16,7 @@ const module = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name][contenthash].js",
     clean: true,
+    assetModuleFilename: "[name][ext]",
   },
   devtool: "source-map",
   devServer: {
@@ -38,6 +40,10 @@ const module = {
           options: { presets: ["@babel/preset-env"] },
         },
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|ico)$/i,
+        type: "asset/resource",
+      },
     ],
   },
   plugins: [
@@ -45,8 +51,16 @@ const module = {
       title: "Calculator",
       filename: "index.html",
       template: "./src/index.html",
+      favicon: "./src/assets/favicon.svg",
     }),
     new ESLintPlugin(),
+    new FaviconsWebpackPlugin({
+      logo: "./src/assets/favicon.svg",
+      prefix: "icons/",
+      emitStats: false,
+      statsFilename: "iconstats-[hash].json",
+      persistentCache: true,
+    }),
   ],
 };
 

@@ -39,6 +39,10 @@ for (const buttonValue in VALUES) {
     case VALUES.ALLCLEAR:
       button.dataset.allclear = VALUES[buttonValue];
       break;
+    case VALUES.UNDO:
+      button.dataset.undo = VALUES[buttonValue];
+      button.classList.add("zero");
+      break;
     case VALUES.ZERO:
       button.classList.add("zero");
       break;

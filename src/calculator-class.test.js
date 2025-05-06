@@ -21,6 +21,9 @@ describe("Calculator", () => {
 
   test("divide", () => {
     expect(calc.divide(10, 2)).toBe(5);
+  });
+
+  test("divide to zero", () => {
     expect(() => calc.divide(5, 0)).toThrow("Cannot divide by zero");
   });
 
@@ -46,11 +49,17 @@ describe("Calculator", () => {
 
   test("reciprocal", () => {
     expect(calc.reciprocal(2)).toBe(0.5);
+  });
+
+  test("reciprocal of zero", () => {
     expect(() => calc.reciprocal(0)).toThrow("Cannot take reciprocal of zero");
   });
 
   test("square root", () => {
     expect(calc.squareRoot(9)).toBe(3);
+  });
+
+  test("square root of negative", () => {
     expect(() => calc.squareRoot(-1)).toThrow(
       "Cannot take square root of negative number",
     );
@@ -62,6 +71,9 @@ describe("Calculator", () => {
 
   test("y root x", () => {
     expect(calc.yRootX(8, 3)).toBe(2);
+  });
+
+  test("y root x invalid", () => {
     expect(() => calc.yRootX(-8, 2)).toThrow("Invalid operation");
     expect(() => calc.yRootX(4, 0)).toThrow("Invalid operation");
   });
@@ -70,6 +82,9 @@ describe("Calculator", () => {
     expect(calc.factorial(0)).toBe(1);
     expect(calc.factorial(1)).toBe(1);
     expect(calc.factorial(5)).toBe(120);
+  });
+
+  test("factorial of negative", () => {
     expect(() => calc.factorial(-1)).toThrow(
       "Factorial of negative number doesn't exist",
     );
