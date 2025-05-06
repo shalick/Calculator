@@ -1,17 +1,17 @@
 import Calculator from "./calculator-class.js";
 import CalculatorInvoker from "./calculator-invoker-class.js";
 import CalculatorUI from "./calculator-ui-class.js";
-import { NUMBERVALUES, OPERATORS, VALUES, KEYDOWNBUTTONS } from "./consts.js";
+import {
+  NUMBERVALUES,
+  BINARYOPERATIONS,
+  OPERATORS,
+  VALUES,
+  KEYDOWNBUTTONS,
+  UNARYOPERATIONS,
+  MEMORYBUTTONS,
+} from "./consts.js";
 
-const numberButtons = document.querySelectorAll("[data-number]");
-const operationButtons = document.querySelectorAll("[data-operation]");
-const unaryOperationButtons = document.querySelectorAll(
-  "[data-unaryoperation]",
-);
-const memoryButtons = document.querySelectorAll("[data-memory]");
-const equalsButton = document.querySelector("[data-equals]");
-const allClearButton = document.querySelector("[data-allclear]");
-const undoButton = document.querySelector("[data-undo]");
+const buttons = document.querySelector(".buttons");
 const previousOperandTextElement = document.querySelector(
   "[data-previous-operand]",
 );
@@ -51,32 +51,29 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
-for (const button of numberButtons) {
-  button.addEventListener("click", () => {
-    calculatorUI.appendNumber(button.innerText);
-  });
-}
-for (const button of operationButtons) {
-  button.addEventListener("click", () => {
-    calculatorUI.chooseOperation(button.innerText);
-  });
-}
-for (const button of unaryOperationButtons) {
-  button.addEventListener("click", () => {
-    calculatorUI.chooseUnaryOperation(button.innerText);
-  });
-}
-for (const button of memoryButtons) {
-  button.addEventListener("click", () => {
-    calculatorUI.memoryOperation(button.innerText);
-  });
-}
-equalsButton.addEventListener("click", () => {
-  calculatorUI.calculate();
-});
-allClearButton.addEventListener("click", () => {
-  calculatorUI.allClear();
-});
-undoButton.addEventListener("click", () => {
-  calculatorUI.undo();
+buttons.addEventListener("click", (event) => {
+  if (
+    NUMBERVALUES.includes(event.target.dataset.number) ||
+    event.target.dataset.number === VALUES.DECIMAL
+  ) {
+    calculatorUI.appendNumber(event.target.dataset.number);
+  }
+  if (UNARYOPERATIONS.includes(event.target.dataset.unaryoperation)) {
+    calculatorUI.chooseUnaryOperation(event.target.dataset.unaryoperation);
+  }
+  if (BINARYOPERATIONS.includes(event.target.dataset.operation)) {
+    calculatorUI.chooseOperation(event.target.dataset.operation);
+  }
+  if (MEMORYBUTTONS.includes(event.target.dataset.memory)) {
+    calculatorUI.memoryOperation(event.target.dataset.memory);
+  }
+  if (event.target.dataset.equals === VALUES.EQUALS) {
+    calculatorUI.calculate();
+  }
+  if (event.target.dataset.allclear === VALUES.ALLCLEAR) {
+    calculatorUI.allClear();
+  }
+  if (event.target.dataset.undo === VALUES.UNDO) {
+    calculatorUI.undo();
+  }
 });
